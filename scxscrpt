@@ -3,16 +3,16 @@ gg.sleep("2000")
 
 gg.alert[[
 [ By SimpleCodeStudio ]
-----------------------------------------------------------------
+------------------------------------------------------------
 SIMCITY SCRIPT
-----------------------------------------------------------------
+------------------------------------------------------------
 What's New?
-Updated: 10/03/2023
+Updated: 10/04/2023
 
 ✓- Script added.
 ✓- Script is now beta.
 
-----------------------------------------------------------------
+------------------------------------------------------------
 ]]
 
 local aWait = {}
@@ -32,6 +32,7 @@ function alertForZeroTimeItems()
     gg.editAll("0",gg.TYPE_DWORD)
     gg.toast("\nSuccessful. Enjoy!")
     aWait = 0
+    gg.clearResults()
   end
 end
 
@@ -71,6 +72,7 @@ function mainMenu()
   end
   
   if m1 == 2 then
+    gg.alert("WARNING\nIf script finds wrong value try searching again")
     gg.toast("\nPlease Wait...")
     gg.clearResults()
     gg.searchNumber("3000000;20::8",gg.TYPE_DWORD)
@@ -91,6 +93,7 @@ function mainMenu()
         ofsetValues = 48000
         ofsets()
         gg.toast("\nSuccessful")
+        gg.clearResults()
         return
       end
       gg.refineNumber("10000000")
@@ -100,6 +103,7 @@ function mainMenu()
       ofsetValues = 48000
       ofsets()
       gg.toast("\nSuccessful")
+      gg.clearResults()
       return
     end
     gg.refineNumber("3000000")
@@ -109,6 +113,7 @@ function mainMenu()
     ofsetValues = 48000
     ofsets()
     gg.toast("\nSuccessful")
+    gg.clearResults()
   end
   
   if m1 == 3 then
@@ -119,6 +124,7 @@ function mainMenu()
     gg.getResults("200")
     gg.editAll("16000000",gg.TYPE_DWORD)
     gg.toast("\nSuccessful")
+    gg.clearResults()
   end
   
   if m1 == 4 then
