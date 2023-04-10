@@ -2,13 +2,17 @@ gg.toast("\nLoading...")
 gg.sleep("2000")
 
 gg.alert[[
-By SimpleCodeStudio
-------------------------
+[ By SimpleCodeStudio ]
+--------------------------------
+SIMCITY SCRIPT
+--------------------------------
 What's New?
 Updated: 10/03/2023
+
 ✓- Script added.
 ✓- Script is now beta.
-------------------------
+
+--------------------------------
 ]]
 
 local aWait = {}
