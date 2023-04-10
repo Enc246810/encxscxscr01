@@ -1,0 +1,141 @@
+gg.toast("\nLoading...")
+gg.sleep("2000")
+
+gg.alert[[
+By SimpleCodeStudio
+------------------------
+What's New?
+Updated: 10/03/2023
+✓- Script added.
+✓- Script is now beta.
+------------------------
+]]
+
+local aWait = {}
+local ofsetOffsets = {}
+local ofsetValues = {}
+
+function alertForZeroTimeItems()
+  aa = gg.alert('Step 1:\nCopy saved value and search.\n\nStep 2:\nSave all finded values and use ofset "-4".\n\nStep 3:\nReplace all saved values.\n\nStep 4:\nClick "YES" Button.\n\nAre you now ready?', "YES", "NO")
+  
+  if aa == 2 then
+    gg.toast("\nOkay. I waiting you.")
+  end
+  
+  if aa == 1 then
+    gg.refineNumber("60000~30000000")
+    gg.getResults("200")
+    gg.editAll("0",gg.TYPE_DWORD)
+    gg.toast("\nSuccessful. Enjoy!")
+    aWait = 0
+  end
+end
+
+function ofsets()
+  gg.sleep("200")
+  R = gg.getResults(1)
+  local ofset = {}
+  ofset[1] = {}
+  ofset[1].address = R[1].address + ofsetOffsets
+  ofset[1].flags = gg.TYPE_DWORD
+  ofset[1].value = ofsetValues
+  ofset[1].freeze = false
+  gg.addListItems(ofset)
+  gg.setValues(ofset)
+  gg.setVisible(false)
+end
+
+function mainMenu()
+  
+  m1 = gg.choice({"Set 0 All building time", "48k simcash", "16m simoleon", "Exit"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
+  
+  if m1 == 1 then
+    gg.toast("\nPlease Wait...")
+    gg.clearResults()
+    gg.searchNumber("25200000",gg.TYPE_DWORD)
+    R = gg.getResults(1)
+    local ofset = {}
+    ofset[1] = {}
+    ofset[1].address = R[1].address + 4
+    ofset[1].flags = gg.TYPE_DWORD
+    ofset[1].freeze = false
+    gg.addListItems(ofset)
+    gg.setVisible(false)
+    gg.clearResults()
+    aWait = 1
+    gg.alert('Step 1:\nCopy saved value and search.\n\nStep 2:\nSave all finded values and use ofset "-4".\n\nStep 3:\nReplace all saved values.\n\nStep 4:\nClick "YES" Button.')
+  end
+  
+  if m1 == 2 then
+    gg.toast("\nPlease Wait...")
+    gg.clearResults()
+    gg.searchNumber("3000000;20::8",gg.TYPE_DWORD)
+    if gg.getResultsCount() == 0 then
+      gg.toast("\nRefreshing...")
+      gg.searchNumber("10000000;30::8",gg.TYPE_DWORD)
+      if gg.getResultsCount() == 0 then
+        gg.toast("\nRefreshing...")
+        gg.searchNumber("20000000;100::8",gg.TYPE_DWORD)
+        if gg.getResultsCount() == 0 then
+          gg.alert("Value not found. Please contact the developer for new mentions.")
+          return
+        end
+        gg.refineNumber("20000000")
+        gg.getResults(1)
+        gg.editAll("0",gg.TYPE_DWORD)
+        ofsetOffsets = 4
+        ofsetValues = 48000
+        ofsets()
+        gg.toast("\nSuccessful")
+        return
+      end
+      gg.refineNumber("10000000")
+      gg.getResults(1)
+      gg.editAll("0",gg.TYPE_DWORD)
+      ofsetOffsets = 4
+      ofsetValues = 48000
+      ofsets()
+      gg.toast("\nSuccessful")
+      return
+    end
+    gg.refineNumber("3000000")
+    gg.getResults(1)
+    gg.editAll("0",gg.TYPE_DWORD)
+    ofsetOffsets = 4
+    ofsetValues = 48000
+    ofsets()
+    gg.toast("\nSuccessful")
+  end
+  
+  if m1 == 3 then
+    gg.toast("\nPlease Wait...")
+    gg.clearResults()
+    gg.searchNumber("2000;1;1;100;500::326",gg.TYPE_DWORD)
+    gg.refineNumber("2000")
+    gg.getResults("200")
+    gg.editAll("16000000",gg.TYPE_DWORD)
+    gg.toast("\nSuccessful")
+  end
+  
+  if m1 == 4 then
+    print("EXIT SUCCESSFUL")
+    gg.setVisible(true)
+    os.exit()
+  end
+end
+
+
+
+
+
+gg.showUiButton()
+while true do
+  if gg.isClickedUiButton() then
+    gg.setVisible(false)
+    if aWait == 1 then
+      alertForZeroTimeItems()
+      else
+        mainMenu()
+    end
+  end
+end
