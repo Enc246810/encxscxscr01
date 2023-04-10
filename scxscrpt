@@ -52,12 +52,29 @@ end
 
 function mainMenu()
   
-  m1 = gg.choice({"Set 0 All building time", "48k simcash", "16m simoleon", "Exit"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
+  m1 = gg.choice({"💗┃Help to SCS", "⌛┃Set 0 All building time", "💵┃48k simcash", "💰┃16m simoleon", "❌┃Exit"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
   
   if m1 == 1 then
+    aaa = gg.alert("DONATE\nEven the smallest donation you make can save me from the difficult conditions of this economy.  And I can take care of you. 😇💗", "DONATE", "NO SORRY")
+    if aaa == 1 then
+      gg.alert("Donation, only supporting Patreon.")
+      gg.copyText("https://www.patreon.com/user/membership?u=86903282")
+      gg.toast("\nDonation link copied.")
+    end
+    if aaa == 2 then
+      gg.toast("\nThanks anyway. 💗")
+      return
+    end
+  end
+  
+  if m1 == 2 then
     gg.toast("\nPlease Wait...")
     gg.clearResults()
     gg.searchNumber("25200000",gg.TYPE_DWORD)
+    if gg.getResultsCount() == 0 then
+      gg.alert("Value not found. Please contact the developer for new mentions.")
+      return
+    end
     R = gg.getResults(1)
     local ofset = {}
     ofset[1] = {}
@@ -71,7 +88,7 @@ function mainMenu()
     gg.alert('Step 1:\nCopy saved value and search.\n\nStep 2:\nSave all finded values and use ofset "-4".\n\nStep 3:\nReplace all saved values.\n\nStep 4:\nClick "YES" Button.')
   end
   
-  if m1 == 2 then
+  if m1 == 3 then
     gg.alert("WARNING\nIf script finds wrong value try searching again")
     gg.toast("\nPlease Wait...")
     gg.clearResults()
@@ -116,10 +133,14 @@ function mainMenu()
     gg.clearResults()
   end
   
-  if m1 == 3 then
+  if m1 == 4 then
     gg.toast("\nPlease Wait...")
     gg.clearResults()
     gg.searchNumber("2000;1;1;100;500::326",gg.TYPE_DWORD)
+    if gg.getResultsCount() == 0 then
+      gg.alert("Value not found. Please contact the developer for new mentions.")
+      return
+    end
     gg.refineNumber("2000")
     gg.getResults("200")
     gg.editAll("16000000",gg.TYPE_DWORD)
@@ -127,7 +148,7 @@ function mainMenu()
     gg.clearResults()
   end
   
-  if m1 == 4 then
+  if m1 == 5 then
     print("EXIT SUCCESSFUL")
     gg.setVisible(true)
     os.exit()
