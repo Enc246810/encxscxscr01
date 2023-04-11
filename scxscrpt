@@ -1,6 +1,6 @@
 gg.toast("\nLoading...")
 gg.sleep("2000")
-
+gg.setRanges(gg.REGION_C_ALLOC)
 gg.alert[[
 [ By SimpleCodeStudio ]
 ------------------------------------------------------------
@@ -72,7 +72,7 @@ function mainMenu()
     gg.clearResults()
     gg.searchNumber("25200000",gg.TYPE_DWORD)
     if gg.getResultsCount() == 0 then
-      gg.alert("Value not found. Please contact the developer for new mentions.")
+      gg.alert("Value not found. Please contact the developer for new functions.")
       return
     end
     R = gg.getResults(1)
@@ -100,7 +100,7 @@ function mainMenu()
         gg.toast("\nRefreshing...")
         gg.searchNumber("20000000;100::8",gg.TYPE_DWORD)
         if gg.getResultsCount() == 0 then
-          gg.alert("Value not found. Please contact the developer for new mentions.")
+          gg.alert("Value not found. Please contact the developer for new functions.")
           return
         end
         gg.refineNumber("20000000")
@@ -138,7 +138,7 @@ function mainMenu()
     gg.clearResults()
     gg.searchNumber("2000;1;1;100;500::326",gg.TYPE_DWORD)
     if gg.getResultsCount() == 0 then
-      gg.alert("Value not found. Please contact the developer for new mentions.")
+      gg.alert("Value not found. Please contact the developer for new functions.")
       return
     end
     gg.refineNumber("2000")
