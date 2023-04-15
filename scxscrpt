@@ -7,10 +7,9 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 13/04/2023
+Updated: 15/04/2023
 
-✓- Added new functions in "48k Simcash" menu.
-✓- Added a CANCEL button in "set 0 all building time" menu.
+✓- Added an encryption key to protect the script from being stolen.  This will change with each update.
 ✓- Fixed some bugs.
 
 ------------------------------------------------------------
@@ -20,13 +19,27 @@ local aWait = {}
 local ofsetOffsets = {}
 local ofsetValues = {}
 
+function protection()
+  p = gg.prompt({"Protection Key:"}, {""}, {"text"})
+  if p == nil then
+  else
+  if p[1] == "scs45x" then
+    gg.toast("\nProtection key is correct.")
+    aWait = 0
+    else
+      gg.alert("protection key failed.  Please join my discord server for the key!")
+      return
+  end
+  end
+end
+
 function valueNotFound()
 	gg.alert("Value not found. Please contact the developer for new functions.")
     return
 end
 
 function alertForZeroTimeItems()
-  aa = gg.alert('Step 1:\nCopy saved value and search.\n\nStep 2:\nSave all finded values and use ofset "-4".\n\nStep 3:\nReplace all saved values.\n\nStep 4:\nClick "YES" Button.\n\nAre you now ready?', "YES", "NO", "CANCEL")
+  aa = gg.alert('Step 1:\nCopy saved value and search.\n\nStep 2:\nSave all finded values and use ofset "-4".\n\nStep 3:\nReplace all saved values.\n\nStep 4:\nClick the "YES" button when you are ready.', "YES", "NO", "CANCEL")
   
   if aa == 3 then
 	aWait = 0
@@ -82,14 +95,11 @@ function mainMenu()
   if m1 == 2 then
     gg.toast("\nPlease Wait...")
     gg.clearResults()
-    gg.searchNumber("25200000;126::12",gg.TYPE_DWORD)
-    if gg.getResultsCount() == 0 then
-		gg.toast("\nValue not found. Refreshing...")
 		gg.searchNumber("25200000",gg.TYPE_DWORD)
 		if gg.getResultsCount() == 0 then
 			valueNotFound()
+			return
 		end
-    end
     R = gg.getResults(1)
     local ofset = {}
     ofset[1] = {}
@@ -99,8 +109,8 @@ function mainMenu()
     gg.addListItems(ofset)
     gg.setVisible(false)
     gg.clearResults()
+    gg.alert("If you don't understand just follow the steps!")
     aWait = 1
-    gg.alert('Step 1:\nCopy saved value and search.\n\nStep 2:\nSave all finded values and use ofset "-4".\n\nStep 3:\nReplace all saved values.\n\nStep 4:\nClick "YES" Button.')
   end
   
   if m1 == 3 then
@@ -338,16 +348,20 @@ end
 
 
 
-
+aWait = 2
 
 gg.showUiButton()
 while true do
   if gg.isClickedUiButton() then
     gg.setVisible(false)
+    if aWait == 0 then
+      mainMenu()
+    end
     if aWait == 1 then
       alertForZeroTimeItems()
-      else
-        mainMenu()
+    end
+    if aWait == 2 then
+      protection()
     end
   end
 end
