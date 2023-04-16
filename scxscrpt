@@ -7,7 +7,7 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 15/04/2023
+Updated: 16/04/2023
 
 ✓- Fixed some bugs.
 
@@ -96,8 +96,12 @@ function mainMenu()
     gg.clearResults()
 		gg.searchNumber("25200000;111::12",gg.TYPE_DWORD)
 		if gg.getResultsCount() == 0 then
+		  gg.toast("\nRefreshing...")
+		  gg.searchNumber("25200000;122::12",gg.TYPE_DWORD)
+		  if gg.getResultsCount() == 0 then
 			valueNotFound()
 			return
+			end
 		end
     R = gg.getResults(1)
     local ofset = {}
