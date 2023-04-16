@@ -9,7 +9,6 @@ SIMCITY SCRIPT
 What's New?
 Updated: 15/04/2023
 
-✓- Added an encryption key to protect the script from being stolen.  This will change with each update.
 ✓- Fixed some bugs.
 
 ------------------------------------------------------------
@@ -95,7 +94,7 @@ function mainMenu()
   if m1 == 2 then
     gg.toast("\nPlease Wait...")
     gg.clearResults()
-		gg.searchNumber("25200000",gg.TYPE_DWORD)
+		gg.searchNumber("25200000;111::12",gg.TYPE_DWORD)
 		if gg.getResultsCount() == 0 then
 			valueNotFound()
 			return
