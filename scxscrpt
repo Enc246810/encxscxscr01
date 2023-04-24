@@ -7,7 +7,7 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 16/04/2023
+Updated: 25/04/2023
 
 ✓- Fixed some bugs.
 
@@ -22,9 +22,10 @@ function protection()
   p = gg.prompt({"Protection Key:"}, {""}, {"text"})
   if p == nil then
   else
-  if p[1] == "scs711x" then
+  if p[1] == "scs4141" then
     gg.toast("\nProtection key is correct.")
     aWait = 0
+    mainMenu()
     else
       gg.alert("protection key failed.  Please join my discord server for the key!")
       return
@@ -94,21 +95,22 @@ function mainMenu()
   if m1 == 2 then
     gg.toast("\nPlease Wait...")
     gg.clearResults()
-		gg.searchNumber("25200000;111::12",gg.TYPE_DWORD)
-		if gg.getResultsCount() == 0 then
-		  gg.toast("\nRefreshing...")
-		  gg.searchNumber("25200000;122::12",gg.TYPE_DWORD)
-		  if gg.getResultsCount() == 0 then
-			valueNotFound()
-			return
-			end
+		gg.searchNumber("25200000",gg.TYPE_DWORD)
+	  if gg.getResultsCount() == 0 then
+  		valueNotFound()
+  		return
 		end
-    R = gg.getResults(1)
+    R = gg.getResults(2)
     local ofset = {}
     ofset[1] = {}
     ofset[1].address = R[1].address + 4
     ofset[1].flags = gg.TYPE_DWORD
     ofset[1].freeze = false
+    gg.addListItems(ofset)
+    ofset[2] = {}
+    ofset[2].address = R[2].address + 4
+    ofset[2].flags = gg.TYPE_DWORD
+    ofset[2].freeze = false
     gg.addListItems(ofset)
     gg.setVisible(false)
     gg.clearResults()
