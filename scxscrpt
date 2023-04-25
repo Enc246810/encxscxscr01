@@ -1,6 +1,17 @@
+local timerOfset = {}
+
 gg.toast("\nLoading...")
 gg.sleep("2000")
-gg.setRanges(gg.REGION_C_ALLOC)
+
+bitS = gg.choice({"32 Bit", "64 Bit"},nil, "Please select your device bit version.")
+if bitS == 1 then
+  gg.setRanges(gg.REGION_ANONYMOUS)
+  timerOfset = 0x74
+end
+if bitS == 2 then
+  gg.setRanges(gg.REGION_C_ALLOC)
+  timerOfset = 0x9c
+end
 gg.alert[[
 [ By SimpleCodeStudio ]
 ------------------------------------------------------------
@@ -10,7 +21,7 @@ What's New?
 Updated: 25/04/2023
 
 ✓- Fixed some bugs.
-✓- Set 0 all building time now %100 auto.
+✓- Set 0 all  timers of production and nano now %100 auto.
 
 ------------------------------------------------------------
 ]]
@@ -37,6 +48,7 @@ end
 function valueNotFound()
 	gg.alert("Value not found. Please contact the developer for new functions.")
     return
+    mainMenu()
 end
 
 function ofsets()
@@ -55,7 +67,7 @@ end
 
 function mainMenu()
   
-  m1 = gg.choice({"💗┃Help to SCS", "⌛┃Set 0 All building time", "💵┃48k simcash", "💰┃16m simoleon", "❌┃Exit"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
+  m1 = gg.choice({"💗┃Help to SCS", "⌛┃Set 0 All Production and Nano  timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
   
   if m1 == 1 then
     aaa = gg.alert("DONATE\nEven the smallest donation you make can save me from the difficult conditions of this economy.  And I can take care of you. 😇💗", "DONATE", "NO SORRY")
@@ -73,15 +85,15 @@ function mainMenu()
   if m1 == 2 then
     gg.toast("\nPlease Wait...")
     gg.clearResults()
-    gg.searchNumber("9900000",gg.TYPE_DWORD)
-    if gg.getResultsCount() == 0 then
-  	valueNotFound()
-  	return
-    end
+		gg.searchNumber("9900000",gg.TYPE_DWORD)
+	  if gg.getResultsCount() == 0 then
+  		valueNotFound()
+  		return
+		end
     R = gg.getResults(1)
     local ofset = {}
     ofset[1] = {}
-    ofset[1].address = R[1].address - 0x9c
+    ofset[1].address = R[1].address - timerOfset
     ofset[1].flags = gg.TYPE_DWORD
     ofset[1].freeze = false
     gg.addListItems(ofset)
@@ -99,7 +111,7 @@ function mainMenu()
     local rslt = gg.getListItems()
     if not copy then gg.removeListItems(rslt) end
     for i, v in ipairs(rslt) do
-    v.address = v.address + 0x9c
+    v.address = v.address + timerOfset
     if copy then v.name = v.name..' #2' end
     end
     gg.addListItems(rslt)
@@ -143,7 +155,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smKing == 2 then
 			gg.toast("\nPlease Wait...")
@@ -159,7 +171,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smKing == 3 then
 			gg.toast("\nPlease Wait...")
@@ -175,7 +187,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 	end
 	if sm == 2 then
@@ -211,7 +223,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smMp == 3 then
 			gg.toast("\nPlease Wait...")
@@ -227,7 +239,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 	end
 	if sm == 3 then
@@ -247,7 +259,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smMos == 2 then
 			gg.toast("\nPlease Wait...")
@@ -263,7 +275,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smMos == 3 then
 			gg.toast("\nPlease Wait...")
@@ -279,7 +291,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 	end
 	if sm == 4 then
@@ -299,7 +311,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smCt == 2 then
 			gg.toast("\nPlease Wait...")
@@ -315,7 +327,7 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 		if smCt == 3 then
 			gg.toast("\nPlease Wait...")
@@ -331,13 +343,13 @@ function mainMenu()
 			ofsetValues = 48000
 			ofsets()
 			gg.toast("\nSuccessful")
-			gg.clearResults()
+			gg.clearResults()gg.clearList()
 		end
 	end
   end
   
   if m1 == 4 then
-    gg.toast("\nPlease Wait...")
+    gg.toast("\nPlease Wait...")gg.alert("PLEASE be on war pass and be on first leg where you find 2000 golden coins ")
     gg.clearResults()
     gg.searchNumber("2000;1;1;100;500::326",gg.TYPE_DWORD)
     if gg.getResultsCount() == 0 then
@@ -345,9 +357,9 @@ function mainMenu()
     end
     gg.refineNumber("2000")
     gg.getResults("200")
-    gg.editAll("16000000",gg.TYPE_DWORD)
+    gg.editAll("20000000",gg.TYPE_DWORD)
     gg.toast("\nSuccessful")
-    gg.clearResults()
+    gg.clearResults()gg.clearList()
   end
   
   if m1 == 5 then
