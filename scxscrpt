@@ -1,5 +1,10 @@
 local timerOfset = {}
+local blocker = {}
+local aWait = {}
+local ofsetOffsets = {}
+local ofsetValues = {}
 
+blocker = 0
 gg.toast("\nLoading...")
 gg.sleep("2000")
 
@@ -18,17 +23,13 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 25/04/2023
+Updated: 28/04/2023
 
 ✓- Fixed some bugs.
-✓- Set 0 all  timers of production and nano now %100 auto.
+✓- Added Expand search bar. For not finded values.
 
 ------------------------------------------------------------
 ]]
-
-local aWait = {}
-local ofsetOffsets = {}
-local ofsetValues = {}
 
 function protection()
   p = gg.prompt({"Protection Key:"}, {""}, {"text"})
@@ -46,7 +47,7 @@ function protection()
 end
 
 function valueNotFound()
-	gg.alert("Value not found. Please contact the developer for new functions.")
+	gg.alert('Value not found. Please contact the developer for new functions. Or Active "Expand search bar"')
     return
     mainMenu()
 end
@@ -67,7 +68,7 @@ end
 
 function mainMenu()
   
-  m1 = gg.choice({"💗┃Help to SCS", "⌛┃Set 0 All Production and Nano  timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
+  m1 = gg.choice({"💗┃Help to SCS", "⌛┃Set 0 All Production and Nano timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit", "⚙┃Expand search bar"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
   
   if m1 == 1 then
     aaa = gg.alert("DONATE\nEven the smallest donation you make can save me from the difficult conditions of this economy.  And I can take care of you. 😇💗", "DONATE", "NO SORRY")
@@ -83,58 +84,64 @@ function mainMenu()
   end
   
   if m1 == 2 then
-    gg.toast("\nPlease Wait...")
-    gg.clearResults()
-		gg.searchNumber("9900000",gg.TYPE_DWORD)
-	  if gg.getResultsCount() == 0 then
-  		valueNotFound()
-  		return
+		if blocker == 1 then
+		gg.alert("You already reset the time, dude...")
 		end
-    R = gg.getResults(1)
-    local ofset = {}
-    ofset[1] = {}
-    ofset[1].address = R[1].address - timerOfset
-    ofset[1].flags = gg.TYPE_DWORD
-    ofset[1].freeze = false
-    gg.addListItems(ofset)
-    gg.setVisible(false)
-    gg.clearResults()
-    gg.sleep("200")
-    get = gg.getListItems("1")
-    gg.searchNumber(get[1].value,gg.TYPE_DWORD)
-    local rslt = gg.getResults("108")
-    gg.addListItems(rslt)
-    rslt = nil
-    
-    
-    local copy = false
-    local rslt = gg.getListItems()
-    if not copy then gg.removeListItems(rslt) end
-    for i, v in ipairs(rslt) do
-    v.address = v.address + timerOfset
-    if copy then v.name = v.name..' #2' end
-    end
-    gg.addListItems(rslt)
-    t = nil
-    copy = nil
-    
-    
-    revert = gg.getListItems()
-    local rslt = gg.getListItems()
-    for i, v in ipairs(rslt) do
-    if v.flags == gg.TYPE_DWORD then
-    	v.value = "0"
-    	v.freeze = false
-    	v.freezeType = gg.FREEZE_NORMAL
-    end
-    end
-    gg.addListItems(rslt)
-    gg.setValues(rslt)
-    rslt = nil
-    gg.clearResults()
-    gg.clearList()
-    gg.toast("\nSuccessful")
-  end
+		if blocker == 0 then
+		gg.toast("\nPlease Wait...")
+		gg.clearResults()
+			gg.searchNumber("9900000",gg.TYPE_DWORD)
+		  if gg.getResultsCount() == 0 then
+			valueNotFound()
+			return
+			end
+		R = gg.getResults(1)
+		local ofset = {}
+		ofset[1] = {}
+		ofset[1].address = R[1].address - timerOfset
+		ofset[1].flags = gg.TYPE_DWORD
+		ofset[1].freeze = false
+		gg.addListItems(ofset)
+		gg.setVisible(false)
+		gg.clearResults()
+		gg.sleep("200")
+		get = gg.getListItems("1")
+		gg.searchNumber(get[1].value,gg.TYPE_DWORD)
+		local rslt = gg.getResults("108")
+		gg.addListItems(rslt)
+		rslt = nil
+		
+		
+		local copy = false
+		local rslt = gg.getListItems()
+		if not copy then gg.removeListItems(rslt) end
+		for i, v in ipairs(rslt) do
+		v.address = v.address + timerOfset
+		if copy then v.name = v.name..' #2' end
+		end
+		gg.addListItems(rslt)
+		t = nil
+		copy = nil
+		
+		
+		revert = gg.getListItems()
+		local rslt = gg.getListItems()
+		for i, v in ipairs(rslt) do
+		if v.flags == gg.TYPE_DWORD then
+			v.value = "0"
+			v.freeze = false
+			v.freezeType = gg.FREEZE_NORMAL
+		end
+		end
+		gg.addListItems(rslt)
+		gg.setValues(rslt)
+		rslt = nil
+		gg.clearResults()
+		gg.clearList()
+		gg.toast("\nSuccessful")
+		blocker = 1
+	  end
+	end
   
   if m1 == 3 then
     sm = gg.choice({"King", "Megalopolis", "Master of Simoleons", "Countess"},nil,"Select a task.")
@@ -349,7 +356,12 @@ function mainMenu()
   end
   
   if m1 == 4 then
-    gg.toast("\nPlease Wait...")gg.alert("PLEASE be on war pass and be on first leg where you find 2000 golden coins ")
+	aw = gg.alert("Please make sure you are in the section to receive 2000 Simoleon in the war pass.", "OK WAIT", "IM READY")
+	if aw == 1 then
+		gg.toast("\nI waiting u...")
+		return
+	end
+    gg.toast("\nPlease Wait...")
     gg.clearResults()
     gg.searchNumber("2000;1;1;100;500::326",gg.TYPE_DWORD)
     if gg.getResultsCount() == 0 then
@@ -366,6 +378,11 @@ function mainMenu()
     print("EXIT SUCCESSFUL")
     gg.setVisible(true)
     os.exit()
+  end
+  
+  if m1 == 6 then
+	  gg.setRanges(gg.REGION_JAVA_HEAP | gg.REGION_C_HEAP | gg.REGION_C_ALLOC | gg.REGION_C_DATA | gg.REGION_C_BSS | gg.REGION_PPSSPP | gg.REGION_ANONYMOUS)
+	  gg.toast("\nActivated.")
   end
 end
 
