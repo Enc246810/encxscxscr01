@@ -150,7 +150,7 @@ function mainMenu()
 		gg.setValues(rslt)
 		rslt = nil
 		gg.clearResults()
-		--gg.clearList()
+		gg.clearList()
 		gg.toast("\nSuccessful")
 		blocker = 1
 	  end
