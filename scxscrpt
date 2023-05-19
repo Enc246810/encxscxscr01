@@ -34,7 +34,7 @@ function protection()
   p = gg.prompt({"Protection Key:"}, {""}, {"text"})
   if p == nil then
   else
-  if p[1] == "scsxx" then
+  if p[1] == "1122" then
     gg.toast("\nProtection key is correct.")
     aWait = 0
     mainMenu()
