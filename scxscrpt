@@ -23,7 +23,7 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 14/05/2023
+Updated: 19/05/2023
 
 ✓- Fixed some bugs.
 
@@ -97,29 +97,31 @@ function mainMenu()
 		R = gg.getResults(1)
 		local ofset = {}
 		ofset[1] = {}
-		ofset[1].address = R[1].address - timerOfset
+		ofset[1].address = R[1].address + 4
 		ofset[1].flags = gg.TYPE_DWORD
 		ofset[1].freeze = false
 		gg.addListItems(ofset)
 		gg.setVisible(false)
-		gg.sleep("200")
 		get = gg.getListItems("1")
+		gg.sleep("200")
 		if get[1].value == 0 then
 		  ofsetOffsets = 4
 		  ofsetValues = 0
 		  ofsets()
   		gg.clearResults()
   			gg.searchNumber("9900000",gg.TYPE_DWORD)
-  		ofset[1] = {}
-  		ofset[1].address = R[1].address - timerOfset
-  		ofset[1].flags = gg.TYPE_DWORD
-  		ofset[1].freeze = false
-  		gg.addListItems(ofset)
-  		gg.setVisible(false)
-  		gg.sleep("200")
 		end
+		R2 = gg.getResults(1)
+		ofset[1] = {}
+		ofset[1].address = R2[1].address - timerOfset
+		ofset[1].flags = gg.TYPE_DWORD
+		ofset[1].freeze = false
+		gg.addListItems(ofset)
+		gg.setVisible(false)
+		gg.sleep("200")
+		get2 = gg.getListItems("1")
 		gg.clearResults()
-		gg.searchNumber(get[1].value,gg.TYPE_DWORD)
+		gg.searchNumber(get2[1].value,gg.TYPE_DWORD)
 		local rslt = gg.getResults("108")
 		gg.addListItems(rslt)
 		rslt = nil
