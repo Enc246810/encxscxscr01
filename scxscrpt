@@ -43,7 +43,7 @@ function protection()
     aWait = 0
     mainMenu()
     else
-      gg.alert("Bro password is already Press_OK")
+      gg.alert("Wrong password. Check #SCS_Community server on #sc-announcements.")
       return
   end
   end
