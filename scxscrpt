@@ -8,7 +8,7 @@ blocker = 0
 gg.toast("\nLoading...")
 gg.sleep("2000")
 
-bitS = gg.choice({"32 Bit", "64 Bit"},nil, "Please select your device bit version.")
+bitS = gg.choice({"32 Bit", "64 Bit", "Android 13 (Maybe can work android 11 or 12)"},nil, "Please select your device.")
 if bitS == 1 then
   gg.setRanges(gg.REGION_ANONYMOUS)
   timerOfset = 0x74
@@ -17,13 +17,17 @@ if bitS == 2 then
   gg.setRanges(gg.REGION_C_ALLOC)
   timerOfset = 0x9c
 end
+if bitS == 3 then
+  gg.setRanges(gg.REGION_OTHER)
+  timerOfset = 0x9c
+end
 gg.alert[[
 [ By SimpleCodeStudio ]
 ------------------------------------------------------------
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 19/05/2023
+Updated: 03/06/2023
 
 ✓- Fixed some bugs.
 
@@ -34,12 +38,12 @@ function protection()
   p = gg.prompt({"Protection Key:"}, {""}, {"text"})
   if p == nil then
   else
-  if p[1] == "1122" then
+  if p[1] == "9898" then
     gg.toast("\nProtection key is correct.")
     aWait = 0
     mainMenu()
     else
-      gg.alert("protection key failed.  Please join my discord server for the key!")
+      gg.alert("Bro password is already Press_OK")
       return
   end
   end
@@ -397,7 +401,7 @@ function mainMenu()
   end
   
   if m1 == 6 then
-	  gg.setRanges(gg.REGION_JAVA_HEAP | gg.REGION_C_HEAP | gg.REGION_C_ALLOC | gg.REGION_C_DATA | gg.REGION_C_BSS | gg.REGION_PPSSPP | gg.REGION_ANONYMOUS)
+	  gg.setRanges(gg.REGION_JAVA_HEAP | gg.REGION_C_HEAP | gg.REGION_C_ALLOC | gg.REGION_C_DATA | gg.REGION_C_BSS | gg.REGION_PPSSPP | gg.REGION_ANONYMOUS | gg.REGION_JAVA | gg.REGION_STACK | gg.REGION_ASHMEM | gg.REGION_VIDEO | gg.REGION_OTHER | gg.REGION_BAD | gg.REGION_CODE_APP | gg.REGION_CODE_SYS)
 	  gg.toast("\nActivated.")
   end
 end
