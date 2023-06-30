@@ -8,7 +8,7 @@ blocker = 0
 gg.toast("\nLoading...")
 gg.sleep("2000")
 
-bitS = gg.choice({"32 Bit", "64 Bit", "Android 13 (Maybe can work android 11 or 12)"},nil, "Please select your device.")
+bitS = gg.choice({"32 Bit", "64 Bit"},nil, "Please select your device.")
 if bitS == 1 then
   gg.setRanges(gg.REGION_ANONYMOUS)
   timerOfset = 0x74
@@ -17,19 +17,17 @@ if bitS == 2 then
   gg.setRanges(gg.REGION_C_ALLOC)
   timerOfset = 0x9c
 end
-if bitS == 3 then
-  gg.setRanges(gg.REGION_OTHER)
-  timerOfset = 0x9c
-end
 gg.alert[[
 [ By SimpleCodeStudio ]
 ------------------------------------------------------------
 SIMCITY SCRIPT
+(Recommending Android 10 or lower version)
 ------------------------------------------------------------
 What's New?
-Updated: 03/06/2023
+Updated: 30/06/2023
 
 ✓- Fixed some bugs.
+✓- Added premium script.
 
 ------------------------------------------------------------
 ]]
@@ -38,7 +36,7 @@ function protection()
   p = gg.prompt({"Protection Key:"}, {""}, {"text"})
   if p == nil then
   else
-  if p[1] == "9898" then
+  if p[1] == "1" then
     gg.toast("\nProtection key is correct.")
     aWait = 0
     mainMenu()
@@ -71,24 +69,28 @@ end
 
 function mainMenu()
   
-  m1 = gg.choice({"💗┃Help to SCS", "⌛┃Set 0 All Production and Nano timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit", "⚙┃Expand search bar"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
+  m1 = gg.choice({"⭐┃Premium", "⌛┃Set 0 All Production and Nano timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit", "⚙┃Expand search bar"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
   
   if m1 == 1 then
-    aaa = gg.alert("DONATE\nEven the smallest donation you make can save me from the difficult conditions of this economy.  And I can take care of you. 😇💗", "DONATE", "NO SORRY")
+    aaa = gg.alert("Premium Features\n-> 40m Simoleon.\n-> 100% 48k Simcash. And all the achievements are here.\n-> New functions are in this script.\n-> Can auto update.\n-> Can support all languages. (You need want.)", "GET", "MAYBE LATER")
     if aaa == 1 then
-      gg.alert("Donation, only supporting Patreon.")
+      gg.alert("NOTE\nYou need to get Premium lvl3 ($10) to use it.  Contact me on discord or elsewhere after you get it.  Thanks")
       gg.copyText("https://www.patreon.com/user/membership?u=86903282")
-      gg.toast("\nDonation link copied.")
-    end
+  end
     if aaa == 2 then
-      gg.toast("\nThanks anyway. 💗")
+      gg.toast("\nYou can come back later.")
       return
     end
   end
   
   if m1 == 2 then
 		if blocker == 1 then
-		gg.alert("You already reset the time, dude...")
+		b = gg.alert("You already reset the time. But do you want use again?", "YES", "NO")
+  		if b == 1 then
+  		  blocker = 0
+  		  gg.toast("\nYou can use again now.")
+  		  return
+  		end
 		end
 		if blocker == 0 then
 		gg.toast("\nPlease Wait...")
@@ -96,6 +98,7 @@ function mainMenu()
 			gg.searchNumber("9900000",gg.TYPE_DWORD)
 		  if gg.getResultsCount() == 0 then
 			valueNotFound()
+			blocker = 1
 			return
 			end
 		R = gg.getResults(1)
@@ -163,10 +166,10 @@ function mainMenu()
 	end
   
   if m1 == 3 then
-    gg.alert("WARNING\nGet this only once!  If your simcash drops below 1000, you can use it again.  Do not forget that your simcash exceeding 50k will result in a ban.  Thanks.")
-    sm = gg.choice({"King", "Megalopolis", "Master of Simoleons", "Countess"},nil,"Select a task.")
+    gg.alert("WARNING\nGet this only once!  If your simcash drops below 1000, you can use it again.  Do not forget that your simcash exceeding 49k will result in a ban.  Thanks.")
+    sm = gg.choice({"King", "Megalopolis", "Master of Simoleons", "Countess"},nil,"Select a Achivements.")
 	if sm == 1 then
-		smKing = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "King" task level.')
+		smKing = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "King" Achivements level.')
 
 		if smKing == 1 then
 			gg.toast("\nPlease Wait...")
@@ -218,7 +221,7 @@ function mainMenu()
 		end
 	end
 	if sm == 2 then
-		smMp = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Megalopolis" task level.')
+		smMp = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Megalopolis" Achivements level.')
 
 		if smMp == 1 then
 			gg.toast("\nPlease Wait...")
@@ -270,7 +273,7 @@ function mainMenu()
 		end
 	end
 	if sm == 3 then
-		smMos = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Master of Simoleons" task level.')
+		smMos = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Master of Simoleons" Achivements level.')
 
 		if smMos == 1 then
 			gg.toast("\nPlease Wait...")
@@ -322,7 +325,7 @@ function mainMenu()
 		end
 	end
 	if sm == 4 then
-		smCt = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Countess" task level.')
+		smCt = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Countess" Achivements level.')
 
 		if smCt == 1 then
 			gg.toast("\nPlease Wait...")
