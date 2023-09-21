@@ -1,3 +1,5 @@
+local console = "CONSOLE v0.1\n----------------\n"..os.date("(%H:%M:%S)   ").."Script executed.\n"
+
 local timerOfset = {}
 local blocker = {}
 local aWait = {}
@@ -8,26 +10,38 @@ blocker = 0
 gg.toast("\nLoading...")
 gg.sleep("2000")
 
-bitS = gg.choice({"32 Bit", "64 Bit"},nil, "Please select your device.")
-if bitS == 1 then
-  gg.setRanges(gg.REGION_ANONYMOUS)
-  timerOfset = 0x74
-end
-if bitS == 2 then
-  gg.setRanges(gg.REGION_C_ALLOC)
-  timerOfset = 0x9c
+bitS = gg.choice({"32 Bit", "64 Bit", "Android 11 and Up"},nil, "Please select your device version.")
+if bitS == nil then
+  gg.toast("\nCANCEL")
+  return
+  else
+  if bitS == 1 then
+    gg.setRanges(gg.REGION_ANONYMOUS)
+    timerOfset = 0x74
+    console = console..os.date("(%H:%M:%S)   ").."32 Bit selected.\n"
+  end
+  if bitS == 2 then
+    gg.setRanges(gg.REGION_C_ALLOC)
+    timerOfset = 0x9c
+    console = console..os.date("(%H:%M:%S)   ").."64 Bit selected.\n"
+  end
+  if bitS == 3 then
+    gg.setRanges(gg.REGION_OTHER | gg.REGION_C_ALLOC)
+    timerOfset = 0x9c
+    console = console..os.date("(%H:%M:%S)   ").."Android 11 and Up selected.\n"
+  end
 end
 gg.alert[[
 [ By SimpleCodeStudio ]
 ------------------------------------------------------------
 SIMCITY SCRIPT
-(Recommending Android 10 or lower version)
 ------------------------------------------------------------
 What's New?
-Updated: 30/06/2023
+Updated: 21/09/2023
 
-✓- Fixed some bugs.
-✓- Added premium script.
+✓- Fixed Android 11 and up devices. (BETA)
+
+✓- Added: Console
 
 ------------------------------------------------------------
 ]]
@@ -36,19 +50,22 @@ function protection()
   p = gg.prompt({"Protection Key:"}, {""}, {"text"})
   if p == nil then
   else
-  if p[1] == "1" then
+  if p[1] == "beta" then
+    console = console..os.date("(%H:%M:%S)   ").."Protection key is correct.\n"
     gg.toast("\nProtection key is correct.")
     aWait = 0
     mainMenu()
     else
-      gg.alert("Wrong password. Check #SCS_Community server on #sc-announcements.")
+      console = console..os.date("(%H:%M:%S)   ").."ERROR: Protection key is failed.\n"
+      gg.alert("Check in Discord #SCS_Communtiy sc-announcements channel")
       return
   end
   end
 end
 
 function valueNotFound()
-	gg.alert('Value not found. Please contact the developer for new functions. Or Active "Expand search bar"')
+  console = console..os.date("(%H:%M:%S)   ").."ERROR: Searched value not found.\n"
+	gg.alert('Value not found. Please contact the developer. (SimpleCodeStudio)')
     return
     mainMenu()
 end
@@ -69,15 +86,18 @@ end
 
 function mainMenu()
   
-  m1 = gg.choice({"⭐┃Premium", "⌛┃Set 0 All Production and Nano timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit", "⚙┃Expand search bar"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
+  m1 = gg.choice({"⭐┃Premium", "⌛┃Set 0 All Production and Nano timers", "💵┃48k simcash", "💰┃20m simoleon", "❌┃Exit", "⚙️┃CONSOLE"},nil,"[BETA] Your date is: "..os.date("%d/%m/%Y"))
   
   if m1 == 1 then
+    console = console..os.date("(%H:%M:%S)   ").."Premium features is showing.\n"
     aaa = gg.alert("Premium Features\n-> 40m Simoleon.\n-> 100% 48k Simcash. And all the achievements are here.\n-> New functions are in this script.\n-> Can auto update.\n-> Can support all languages. (You need want.)", "GET", "MAYBE LATER")
     if aaa == 1 then
+      console = console..os.date("(%H:%M:%S)   ").."Premium/GET\n"
       gg.alert("NOTE\nYou need to get Premium lvl3 ($10) to use it.  Contact me on discord or elsewhere after you get it.  Thanks")
       gg.copyText("https://www.patreon.com/user/membership?u=86903282")
   end
     if aaa == 2 then
+      console = console..os.date("(%H:%M:%S)   ").."Premium/MAYBE LATER\n"
       gg.toast("\nYou can come back later.")
       return
     end
@@ -93,6 +113,7 @@ function mainMenu()
   		end
 		end
 		if blocker == 0 then
+		  console = console..os.date("(%H:%M:%S)   ").."Productions timer searching...\n"
 		gg.toast("\nPlease Wait...")
 		gg.clearResults()
 			gg.searchNumber("9900000",gg.TYPE_DWORD)
@@ -162,6 +183,8 @@ function mainMenu()
 		gg.clearList()
 		gg.toast("\nSuccessful")
 		blocker = 1
+		console = console..os.date("(%H:%M:%S)   ").."Successful.\n"
+		gg.alert("If this wrong Successful try again.")
 	  end
 	end
   
@@ -169,6 +192,7 @@ function mainMenu()
     gg.alert("WARNING\nGet this only once!  If your simcash drops below 1000, you can use it again.  Do not forget that your simcash exceeding 49k will result in a ban.  Thanks.")
     sm = gg.choice({"King", "Megalopolis", "Master of Simoleons", "Countess"},nil,"Select a Achivements.")
 	if sm == 1 then
+	  console = console..os.date("(%H:%M:%S)   ").."Selected achievements is King.\n"
 		smKing = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "King" Achivements level.')
 
 		if smKing == 1 then
@@ -186,6 +210,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."King level 1 are set to simcash 48k.\n"
 		end
 		if smKing == 2 then
 			gg.toast("\nPlease Wait...")
@@ -202,6 +227,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."King level 2 are set to simcash 48k.\n"
 		end
 		if smKing == 3 then
 			gg.toast("\nPlease Wait...")
@@ -218,9 +244,11 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."King level 3 are set to simcash 48k.\n"
 		end
 	end
 	if sm == 2 then
+	  console = console..os.date("(%H:%M:%S)   ").."Selected achievements is Megalopolis.\n"
 		smMp = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Megalopolis" Achivements level.')
 
 		if smMp == 1 then
@@ -238,6 +266,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()
+			console = console..os.date("(%H:%M:%S)   ").."Megalopolis level 1 are set to simcash 48k.\n"
 		end
 		if smMp == 2 then
 			gg.toast("\nPlease Wait...")
@@ -254,6 +283,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Megalopolis level 2 are set to simcash 48k.\n"
 		end
 		if smMp == 3 then
 			gg.toast("\nPlease Wait...")
@@ -270,9 +300,11 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Megalopolis level 3 are set to simcash 48k.\n"
 		end
 	end
 	if sm == 3 then
+	  console = console..os.date("(%H:%M:%S)   ").."Selected achievements is Master of Simoleon.\n"
 		smMos = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Master of Simoleons" Achivements level.')
 
 		if smMos == 1 then
@@ -290,6 +322,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Master of Simoleons level 1 are set to simcash 48k.\n"
 		end
 		if smMos == 2 then
 			gg.toast("\nPlease Wait...")
@@ -306,6 +339,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Master of Simoleons level 2 are set to simcash 48k.\n"
 		end
 		if smMos == 3 then
 			gg.toast("\nPlease Wait...")
@@ -322,9 +356,11 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Master of Simoleons level 3 are set to simcash 48k.\n"
 		end
 	end
 	if sm == 4 then
+	  console = console..os.date("(%H:%M:%S)   ").."Selected achievements is Countess.\n"
 		smCt = gg.choice({"Level 1", "Level 2", "Level 3"},nil, 'Select "Countess" Achivements level.')
 
 		if smCt == 1 then
@@ -342,6 +378,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Countess level 1 are set to simcash 48k.\n"
 		end
 		if smCt == 2 then
 			gg.toast("\nPlease Wait...")
@@ -358,6 +395,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Countess level 2 are set to simcash 48k.\n"
 		end
 		if smCt == 3 then
 			gg.toast("\nPlease Wait...")
@@ -374,6 +412,7 @@ function mainMenu()
 			ofsets()
 			gg.toast("\nSuccessful")
 			gg.clearResults()gg.clearList()
+			console = console..os.date("(%H:%M:%S)   ").."Countess level 3 are set to simcash 48k.\n"
 		end
 	end
   end
@@ -384,6 +423,7 @@ function mainMenu()
 		gg.toast("\nI waiting u...")
 		return
 	end
+	  console = console..os.date("(%H:%M:%S)   ").."Searching Vu Pass simoleon address...\n"
     gg.toast("\nPlease Wait...")
     gg.clearResults()
     gg.searchNumber("2000;1;1;100;500::326",gg.TYPE_DWORD)
@@ -395,17 +435,18 @@ function mainMenu()
     gg.editAll("20000000",gg.TYPE_DWORD)
     gg.toast("\nSuccessful")
     gg.clearResults()gg.clearList()
+    console = console..os.date("(%H:%M:%S)   ").."Simoleon are set to 20.000.000.\n"
   end
   
   if m1 == 5 then
-    print("EXIT SUCCESSFUL")
+    console = console..os.date("(%H:%M:%S)   ").."Exiting..."
+    print("EXIT SUCCESSFUL\n\n"..console)
     gg.setVisible(true)
     os.exit()
   end
   
   if m1 == 6 then
-	  gg.setRanges(gg.REGION_JAVA_HEAP | gg.REGION_C_HEAP | gg.REGION_C_ALLOC | gg.REGION_C_DATA | gg.REGION_C_BSS | gg.REGION_PPSSPP | gg.REGION_ANONYMOUS | gg.REGION_JAVA | gg.REGION_STACK | gg.REGION_ASHMEM | gg.REGION_VIDEO | gg.REGION_OTHER | gg.REGION_BAD | gg.REGION_CODE_APP | gg.REGION_CODE_SYS)
-	  gg.toast("\nActivated.")
+	  gg.alert(console)
   end
 end
 
