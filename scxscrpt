@@ -16,17 +16,17 @@ if bitS == nil then
   return
   else
   if bitS == 1 then
-    gg.setRanges(gg.REGION_ANONYMOUS)
+    gg.setRanges(gg.REGION_OTHER | gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
     timerOfset = 0x74
     console = console..os.date("(%H:%M:%S)   ").."32 Bit selected.\n"
   end
   if bitS == 2 then
-    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.setRanges(gg.REGION_OTHER | gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
     timerOfset = 0x9c
     console = console..os.date("(%H:%M:%S)   ").."64 Bit selected.\n"
   end
   if bitS == 3 then
-    gg.setRanges(gg.REGION_OTHER | gg.REGION_C_ALLOC)
+    gg.setRanges(gg.REGION_OTHER | gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
     timerOfset = 0x9c
     console = console..os.date("(%H:%M:%S)   ").."Android 11 and Up selected.\n"
   end
@@ -37,7 +37,7 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 21/09/2023
+Updated: 24/09/2023
 
 ✓- Fixed Android 11 and up devices. (BETA)
 
