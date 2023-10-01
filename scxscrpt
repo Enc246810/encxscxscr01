@@ -37,11 +37,12 @@ gg.alert[[
 SIMCITY SCRIPT
 ------------------------------------------------------------
 What's New?
-Updated: 24/09/2023
+Updated: 2
+01/10/2023
 
 ✓- Fixed Android 11 and up devices. (BETA)
 
-✓- Added: Console
+✓- Added: Strong Console (in premium script. )
 
 ------------------------------------------------------------
 ]]
@@ -90,7 +91,7 @@ function mainMenu()
   
   if m1 == 1 then
     console = console..os.date("(%H:%M:%S)   ").."Premium features is showing.\n"
-    aaa = gg.alert("Premium Features\n-> 40m Simoleon.\n-> 100% 48k Simcash. And all the achievements are here.\n-> New functions are in this script.\n-> Can auto update.\n-> Can support all languages. (You need want.)", "GET", "MAYBE LATER")
+    aaa = gg.alert("Premium Features\n-> 40m Simoleon.\n-> 100% 48k Simcash. And all the achievements are here.\n-> New functions are in this script.\n-> Can auto update.\n-> Can support all languages. (You need want.)\n-> Strong Console.", "GET", "MAYBE LATER")
     if aaa == 1 then
       console = console..os.date("(%H:%M:%S)   ").."Premium/GET\n"
       gg.alert("NOTE\nYou need to get Premium lvl3 ($10) to use it.  Contact me on discord or elsewhere after you get it.  Thanks")
